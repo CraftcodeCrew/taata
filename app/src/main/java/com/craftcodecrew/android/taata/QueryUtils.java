@@ -135,7 +135,11 @@ final class QueryUtils {
         return url;
     }
 
+    /*
+    public static String makeHttpRequest(URL url, String method, List<NameValuePair> headerParams, JSONObject content) {
 
+    }
+    */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 

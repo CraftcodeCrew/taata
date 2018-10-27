@@ -6,6 +6,9 @@ public class Insurance {
     private String name;
     private double pricePerMonth;
 
+    public Insurance() {
+    }
+
     public Insurance(int id, String name, double pricePerMonth){
         this.id = id;
         this.name = name;
@@ -14,6 +17,10 @@ public class Insurance {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

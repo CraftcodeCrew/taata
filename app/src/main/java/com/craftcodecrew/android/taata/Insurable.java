@@ -11,6 +11,9 @@ public class Insurable {
     private boolean insured;
     Insurance insurance;
 
+
+
+
     public String getImageId() {
         return imageId;
     }
