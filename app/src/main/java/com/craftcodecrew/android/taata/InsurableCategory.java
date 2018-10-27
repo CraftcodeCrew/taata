@@ -7,10 +7,10 @@ public class InsurableCategory {
     private int id;
     private String title;
     private String description;
-    private int imageId;
+    private String imageId;
     private ArrayList<Insurable> insurables;
 
-    public InsurableCategory(int id, String title, String description, int imageId, ArrayList<Insurable> insurables) {
+    public InsurableCategory(int id, String title, String description, String imageId, ArrayList<Insurable> insurables) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -38,7 +38,7 @@ public class InsurableCategory {
         this.description = description;
     }
 
-    public void setImageId(int imageId) {
+    public void setImageId(String imageId) {
         this.imageId = imageId;
     }
 
@@ -46,7 +46,7 @@ public class InsurableCategory {
         this.insurables = insurables;
     }
 
-    public int getImageId() {
+    public String getImageId() {
         return imageId;
     }
 

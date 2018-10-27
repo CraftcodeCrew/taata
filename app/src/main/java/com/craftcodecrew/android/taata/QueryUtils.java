@@ -59,8 +59,9 @@ final class QueryUtils {
 
                 //// I receive one big JSON with all categories and their insurables and their insurances
                 // category
-                int categoryId, categoryImageId;
-                String categoryTitle, categoryDescription;
+                int categoryId;
+
+                String categoryImageId, categoryTitle, categoryDescription;
                 ArrayList<Insurable> insurables = new ArrayList<>();
 
 
@@ -68,7 +69,7 @@ final class QueryUtils {
                 categoryId = JSONObject.optInt("id");
                 categoryTitle = JSONObject.optString("title");
                 categoryDescription = JSONObject.optString("description");
-                categoryImageId = JSONObject.optInt("imageId");
+                categoryImageId = JSONObject.optString("imageId");
 
                 JSONArray jsonInsurables = JSONObject.getJSONArray("insurables");
 
@@ -76,14 +77,14 @@ final class QueryUtils {
                     for (int j=0; i< jsonInsurables.length();i++){
 
                         // insurable
-                        int insurableId, insurableImageId;
-                        String insurableTitle, insurableDescription;
+                        int insurableId;
+                        String insurableImageId, insurableTitle, insurableDescription;
                         double probability;
                         boolean insured;
 
                         JSONObject JSONObjectSecond = jsonInsurables.optJSONObject(j);
                         insurableId = JSONObjectSecond.optInt("id");
-                        insurableImageId = JSONObjectSecond.optInt("imageId");
+                        insurableImageId = JSONObjectSecond.optString("imageId");
                         insurableDescription = JSONObjectSecond.optString("description");
                         insurableTitle = JSONObjectSecond.optString("title");
                         probability = JSONObjectSecond.optDouble("probability");

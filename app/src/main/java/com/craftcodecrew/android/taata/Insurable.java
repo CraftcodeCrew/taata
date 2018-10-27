@@ -6,11 +6,16 @@ public class Insurable {
     private String title;
     private String description;
 
-    public int getImageId() {
+    private String imageId;
+    private double probability;
+    private boolean insured;
+    Insurance insurance;
+
+    public String getImageId() {
         return imageId;
     }
 
-    public void setImageId(int imageId) {
+    public void setImageId(String imageId) {
         this.imageId = imageId;
     }
 
@@ -22,10 +27,6 @@ public class Insurable {
         this.insurance = insurance;
     }
 
-    private int imageId;
-    private double probability;
-    private boolean insured;
-    Insurance insurance;
 
     public boolean isInsured() {
         return insured;
@@ -63,7 +64,7 @@ public class Insurable {
         this.probability = probability;
     }
 
-    public Insurable(int id, String title, int imageId,String description, double probability, boolean isInsured, Insurance insurance){
+    public Insurable(int id, String title, String imageId, String description, double probability, boolean isInsured, Insurance insurance){
         this.id = id;
         this.title = title;
         this.imageId = imageId;
