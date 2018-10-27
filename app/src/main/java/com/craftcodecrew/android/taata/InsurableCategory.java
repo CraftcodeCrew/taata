@@ -2,7 +2,7 @@ package com.craftcodecrew.android.taata;
 
 import java.util.ArrayList;
 
-public class InsurableCategorie {
+public class InsurableCategory {
 
     private int id;
     private String title;
@@ -10,7 +10,7 @@ public class InsurableCategorie {
     private int imageId;
     private ArrayList<Insurable> insurables;
 
-    public InsurableCategorie(int id, String title, String description, int imageId, ArrayList<Insurable> insurables) {
+    public InsurableCategory(int id, String title, String description, int imageId, ArrayList<Insurable> insurables) {
         this.id = id;
         this.title = title;
         this.description = description;
