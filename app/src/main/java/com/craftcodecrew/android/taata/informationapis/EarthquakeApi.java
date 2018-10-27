@@ -2,19 +2,17 @@ package com.craftcodecrew.android.taata.informationapis;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
-import com.fasterxml.jackson.databind.type.MapType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Locale;
+
+
 
 public class EarthquakeApi {
     private String api;
@@ -35,6 +33,7 @@ public class EarthquakeApi {
 
 
     public int getHistoricalEearthquakes() throws IOException, JSONException {
+
         HttpURLConnection urlConnection = null;
         URL url = new URL(this.api);
         urlConnection = (HttpURLConnection) url.openConnection();
@@ -63,6 +62,8 @@ public class EarthquakeApi {
         return jsonEarthquakeModel.getCount();
     }
 
+
+    /*
     public static void main(String [] args) throws IOException, JSONException {
         double latitude = 48.78232;
         double longitude = 9.17702;
@@ -70,10 +71,7 @@ public class EarthquakeApi {
         EarthquakeApi ea = new EarthquakeApi(latitude, longitude);
         int earthquakes = ea.getHistoricalEearthquakes();
         System.out.println("" + earthquakes);
-
     }
-
-
-
+    */
 
 }
