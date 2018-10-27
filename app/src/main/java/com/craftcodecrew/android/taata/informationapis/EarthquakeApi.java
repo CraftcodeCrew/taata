@@ -17,7 +17,7 @@ import java.util.Locale;
 public class EarthquakeApi {
     private String api;
     private static double maxradiuskm = 30.0;
-    private static String starttime = "1900-01-01";
+    private static String starttime = "1970-01-01";
     private static String endtime = "2018-10-27";
 
     public EarthquakeApi(double latitude, double longitude) {

@@ -8,13 +8,13 @@ import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.craftcodecrew.android.taata.informationapis.AndroidGps;
-import com.craftcodecrew.android.taata.informationapis.EarthquakeApi;
+import com.craftcodecrew.android.taata.informationapis.EarthquakeInsuranceController;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String OUR_REST_API = "http://172.16.1.175:8080/api/categories";
+    public final static String OUR_REST_API = "http://172.16.1.175:8080/api/categories";
+    public final static String OUR_REST_API_NACKT = "http://172.16.1.175:8080/api";
 
     public final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
             // Called when a new location is found by the network location provider.
-            AndroidGps androidGps = new AndroidGps(location);
-            androidGps.sendNewEeathquakeIsrueable();
+            EarthquakeInsuranceController earthquakeInsuranceController =
+                    new EarthquakeInsuranceController(location.getLatitude(), location.getLongitude());
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {}
