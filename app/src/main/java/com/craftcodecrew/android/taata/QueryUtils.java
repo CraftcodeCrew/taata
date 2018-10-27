@@ -25,7 +25,6 @@ final class QueryUtils {
     private QueryUtils() {
     }
 
-
     // InsurableCategories
     public static List<InsurableCategory> fetchInsurableCategoriesData(String requestUrl) {
         URL url = createUrl(requestUrl);
