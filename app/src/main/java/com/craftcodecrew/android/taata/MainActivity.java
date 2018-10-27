@@ -3,6 +3,9 @@ package com.craftcodecrew.android.taata;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.craftcodecrew.android.taata.informationapis.EarthquakeApi;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private final static String OUR_REST_API = "172.16.1.175:8080/api";
