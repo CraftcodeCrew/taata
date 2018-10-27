@@ -159,7 +159,7 @@ final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the JSON results from Sebastian.", e);
+            Log.e(LOG_TAG, "Only retrieving Koksnutten-JSONs from Sebastian.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
