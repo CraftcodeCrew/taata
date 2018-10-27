@@ -7,10 +7,18 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/standard_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:layout_alignParentTop="true"
         />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="standard-text"
+        android:checked="true"
+        android:layout_below="@id/standard_text"/>
 
 </RelativeLayout>

@@ -24,7 +24,7 @@ final class QueryUtils {
 
     private QueryUtils() {
     }
-/*
+
 
     // InsurableCategories
     public static List<InsurableCategory> fetchInsurableCategoriesData(String requestUrl) {
@@ -48,7 +48,6 @@ final class QueryUtils {
         }
 
         ArrayList<InsurableCategory> insurableCategories = new ArrayList<>();
-        ArrayList<Insurable> insurables = new ArrayList<>();
 
         try {
 
@@ -59,41 +58,69 @@ final class QueryUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 //// I receive one big JSON with all categories and their insurables and their insurances
-                // First all the category data:
-                int categoryId, imageId;
+                // category
+                int categoryId, categoryImageId;
                 String categoryTitle, categoryDescription;
-
-                // Next all the insurables of the categories
-
-
-                // Next all the insurances
-                Insurance insurance;
-
+                ArrayList<Insurable> insurables = new ArrayList<>();
 
 
                 JSONObject JSONObject = jsonArray.optJSONObject(i);
                 categoryId = JSONObject.optInt("id");
-                categoryTitle = JSONObject.optString("webUrl");
-                id = JSONObject.optInt("webTitle");
-                imageId = JSONObject.optInt("sectionName");
-                webPublicationDate = JSONObject.optString("webPublicationDate");
+                categoryTitle = JSONObject.optString("title");
+                categoryDescription = JSONObject.optString("description");
+                categoryImageId = JSONObject.optInt("imageId");
 
-                JSONArray jsonTags = JSONObject.getJSONArray("tags");
-                if (jsonTags.length() == 0 || jsonTags.isNull(0)){
-                    contributor = "Unknown";
+                JSONArray jsonInsurables = JSONObject.getJSONArray("insurables");
+
+                if (jsonInsurables.length() == 0 || jsonInsurables.isNull(0)){
+                    for (int j=0; i< jsonInsurables.length();i++){
+
+                        // insurable
+                        int insurableId, insurableImageId;
+                        String insurableTitle, insurableDescription;
+                        double probability;
+                        boolean insured;
+
+                        JSONObject JSONObjectSecond = jsonInsurables.optJSONObject(j);
+                        insurableId = JSONObjectSecond.optInt("id");
+                        insurableImageId = JSONObjectSecond.optInt("imageId");
+                        insurableDescription = JSONObjectSecond.optString("description");
+                        insurableTitle = JSONObjectSecond.optString("title");
+                        probability = JSONObjectSecond.optDouble("probability");
+                        insured = JSONObjectSecond.optBoolean("insured");
+
+                        // stuff for insurance
+                        int insuranceId;
+                        String insuranceTitle;
+                        double insurancePricePerMonth;
+
+                        JSONArray jsonInsurance = JSONObjectSecond.getJSONArray("insurance");
+                        JSONObject JSONObjectInsurance = jsonInsurance.optJSONObject(0);
+                        insuranceId = JSONObjectInsurance.optInt("id");
+                        insuranceTitle = JSONObjectInsurance.optString("name");
+                        insurancePricePerMonth = JSONObjectInsurance.optDouble("pricePerMonth");
+
+                        // wrap up
+                        Insurance insurance = new Insurance(insuranceId, insuranceTitle, insurancePricePerMonth);
+                        Insurable insurable = new Insurable(insurableId,insurableTitle,insurableImageId,insurableDescription,probability, insured, insurance );
+
+                        insurables.add(insurable);
+                        Log.i("insurable detected", insurableTitle);
+                    }
+
                 } else {
-                    JSONObject jsonContributor = jsonTags.optJSONObject(0);
-                    contributor = jsonContributor.optString("webTitle");
+                    Log.e("Darf nicht", "koksnutte");
                 }
+                Log.i("category detected", categoryTitle);
 
-                InsurableCategory insurableCategory = new insurableCategory();
-                articles.add(article);
+                InsurableCategory insurableCategory = new InsurableCategory(categoryId,categoryTitle,categoryDescription,categoryImageId,insurables);
+                insurableCategories.add(insurableCategory);
             }
         } catch (JSONException e) {
-            Log.e(LOG_TAG, "Problem parsing the earthquake JSON results", e);
+            Log.e(LOG_TAG, "Problem parsing the Master Koksnutten JSON results", e);
         }
 
-        return articles;
+        return insurableCategories;
     }
 
 
@@ -132,7 +159,7 @@ final class QueryUtils {
                 Log.e(LOG_TAG, "Error response code: " + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the earthquake JSON results.", e);
+            Log.e(LOG_TAG, "Problem retrieving the JSON results from Sebastian.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -159,7 +186,4 @@ final class QueryUtils {
         return output.toString();
     }
 
-
-
-*/
 }
