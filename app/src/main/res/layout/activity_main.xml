@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/carousel"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_marginTop="18dp"
+        android:clipChildren="false"
+        android:overScrollMode="never"
+        app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
+        app:viewUpdater="com.craftcodecrew.android.taata.cards.CardsUpdater"/>
+
 
     <TextView
         android:id="@+id/standard_text"
@@ -14,11 +25,14 @@
         android:layout_alignParentTop="true"
         />
 
-    <CheckBox
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="standard-text"
-        android:checked="true"
-        android:layout_below="@id/standard_text"/>
+        android:text="pressMe"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="onClick"/>
+
 
 </RelativeLayout>
