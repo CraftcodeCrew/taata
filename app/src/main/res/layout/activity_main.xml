@@ -32,7 +32,6 @@
             android:layout_height="75dp"
             android:layout_alignEnd="@id/category_title"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
             android:layout_marginTop="25dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
@@ -74,6 +73,7 @@
         android:layout_below="@id/top_bar_layout"
         android:clipChildren="false"
         android:overScrollMode="never"
+        android:background="@drawable/backdrop_dynamics"
         app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
         app:viewUpdater="com.craftcodecrew.android.taata.cards.CardsUpdater" />
 
