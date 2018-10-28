@@ -1,32 +1,25 @@
 package com.craftcodecrew.android.taata;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
-import android.support.annotation.DrawableRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextSwitcher;
 import android.widget.Toast;
 
 import com.craftcodecrew.android.taata.cards.SliderAdapter;
 import com.ramotion.cardslider.CardSliderLayoutManager;
 import com.ramotion.cardslider.CardSnapHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.craftcodecrew.android.taata.informationapis.EarthquakeInsuranceController;
 
@@ -45,7 +38,17 @@ public class MainActivity extends AppCompatActivity {
     private int currentPosition;
     private List<InsurableCategory> categoriesList;
 
-    ImageView imageView;
+    private ImageView imageView;
+    private String[] categoryNames;
+    private String[] categoryDescriptions;
+    private int[] categoryImageId;
+    private List<List<Insurable>> categorysInsurables;
+    private String[] categoryCoverage = {"80/% safe", "56/% safe","25/% safe","90/% safe","72/%","80/%","95/%"};
+
+    private TextSwitcher categoryNameSwitcher;
+    private TextSwitcher categoryDescriptionSwitcher;
+    private TextSwitcher categoryCoverageSwitcher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
         MiniAsyncTask task = new MiniAsyncTask();
         task.execute();
     }
-
 
             LocationListener locationListener = new LocationListener() {
                 public void onLocationChanged(Location location) {
@@ -84,17 +86,30 @@ public class MainActivity extends AppCompatActivity {
             categoriesList = QueryUtils.fetchInsurableCategoriesData(OUR_REST_API);
 
             int categoriesListSize = categoriesList.size();
-            int[] pics = new int[categoriesListSize];
+            categoryImageId = new int[categoriesListSize];
+            categoryNames = new String[categoriesListSize];
+            categoryDescriptions = new String[categoriesListSize];
+            categorysInsurables = new ArrayList<List<Insurable>>(categoriesListSize);
+
+
+
             for (int i=0; i < categoriesListSize; i++){
+
+                categoryNames[i] = categoriesList.get(i).getTitle();
+                categoryDescriptions[i] = categoriesList.get(i).getDescription();
+                categorysInsurables.set(i,categoriesList.get(i).getInsurables());
+
                 String drawableName = categoriesList.get(i).getImageId();
-                pics[i] = getResources()
+                categoryImageId[i] = getResources()
                         .getIdentifier(
                                 drawableName,
                                 "drawable",
                                 getPackageName());
+
+
             }
 
-            sliderAdapter = new SliderAdapter(pics, 7, new OnCardClickListener());
+            sliderAdapter = new SliderAdapter(categoryImageId, 7, new OnCardClickListener());
 
 
             return null;
@@ -146,10 +161,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
     //// everything with the card-carousel!
 
     private void initRecyclerView() {
@@ -176,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
     }
 
-
     private void onActiveCardChange() {
         final int pos = layoutManger.getActiveCardPosition();
         if (pos == RecyclerView.NO_POSITION || pos == currentPosition) {
@@ -194,7 +204,6 @@ public class MainActivity extends AppCompatActivity {
         if (left2right) {
             animH[0] = R.anim.slide_in_left;
             animH[1] = R.anim.slide_out_right;
-
             animV[0] = R.anim.slide_in_bottom;
             animV[1] = R.anim.slide_out_top;
         }
