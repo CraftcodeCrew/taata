@@ -20,6 +20,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.craftcodecrew.android.taata.cards.SliderAdapter;
@@ -32,10 +33,10 @@ import com.craftcodecrew.android.taata.informationapis.EarthquakeInsuranceContro
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static String OUR_REST_API = "http://172.16.1.175:8080/api/categories";
+    private final static String OUR_REST_API = "http://172.16.1.175:8089/api/categories";
     static final Integer FINE_LOCATION = 0x3;
     static final Integer HARDWARE_LOC_GPS = 0x4;
-    public final static String OUR_REST_API_NACKT = "http://172.16.1.175:8080/api";
+    public final static String OUR_REST_API_NACKT = "http://172.16.1.175:8089/api";
 
     private SliderAdapter sliderAdapter;
 
@@ -44,10 +45,14 @@ public class MainActivity extends AppCompatActivity {
     private int currentPosition;
     private List<InsurableCategory> categoriesList;
 
+    ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageView = (ImageView) findViewById(R.id.login);
+        imageView.setVisibility(View.VISIBLE);
 
         // to not make a HttpRequest in Main Thread
         MiniAsyncTask task = new MiniAsyncTask();
@@ -78,26 +83,30 @@ public class MainActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             categoriesList = QueryUtils.fetchInsurableCategoriesData(OUR_REST_API);
 
+            int categoriesListSize = categoriesList.size();
+            int[] pics = new int[categoriesListSize];
+            for (int i=0; i < categoriesListSize; i++){
+                String drawableName = categoriesList.get(i).getImageId();
+                pics[i] = getResources()
+                        .getIdentifier(
+                                drawableName,
+                                "drawable",
+                                getPackageName());
+            }
+
+            sliderAdapter = new SliderAdapter(pics, 7, new OnCardClickListener());
+
+
             return null;
         }
     }
 
 
     public void onClick(View view) {
-        int categoriesListSize = categoriesList.size();
-        int[] pics = new int[categoriesListSize];
-        for (int i=0; i < categoriesListSize; i++){
-            String drawableName = categoriesList.get(i).getImageId();
-            pics[i] = getResources()
-                    .getIdentifier(
-                            drawableName,
-                            "drawable",
-                            getPackageName());
-        }
-
-        sliderAdapter = new SliderAdapter(pics, 20, new OnCardClickListener());
-
         initRecyclerView();
+
+        imageView.setVisibility(View.GONE);
+
     }
 
 

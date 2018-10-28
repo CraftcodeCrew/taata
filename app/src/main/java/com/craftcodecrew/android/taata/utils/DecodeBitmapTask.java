@@ -62,8 +62,8 @@ public class DecodeBitmapTask extends AsyncTask<Void, Void, Bitmap> {
 
         int inSampleSize = 1;
         if (height > reqHeight || width > reqWidth) {
-            int halfWidth = width / 2;
-            int halfHeight = height / 2;
+            int halfWidth = width/2 ;
+            int halfHeight = height/2 ;
 
             while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth
                     && !isCancelled() )

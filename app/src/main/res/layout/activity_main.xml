@@ -9,30 +9,23 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/carousel"
         android:layout_width="match_parent"
-        android:layout_height="210dp"
+        android:layout_height="200dp"
         android:layout_marginTop="18dp"
         android:clipChildren="false"
-        android:overScrollMode="never"
+        android:overScrollMode="always"
         app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
         app:viewUpdater="com.craftcodecrew.android.taata.cards.CardsUpdater"/>
 
 
-    <TextView
-        android:id="@+id/standard_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:layout_alignParentTop="true"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="pressMe"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
+    <ImageView
+        android:id="@+id/login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/logo"
+        android:background="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:padding="50dp"
+        android:visibility="invisible"
         android:onClick="onClick"/>
-
 
 </RelativeLayout>
