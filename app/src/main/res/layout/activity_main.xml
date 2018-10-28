@@ -12,20 +12,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
+        <TextSwitcher
             android:id="@+id/category_title"
             android:layout_width="200dp"
             android:layout_height="75dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginRight="25dp"
-            android:fontFamily="sans-serif-smallcaps"
-            android:gravity="center_vertical"
-            android:text="category_title"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="28sp" />
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_vertical"
+            />
 
         <RelativeLayout
             android:layout_width="150dp"
@@ -52,15 +49,15 @@
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/positive_coverage" />
 
-            <TextView
+            <TextSwitcher
+                android:id="@+id/category_coverage"
                 android:layout_width="85dp"
                 android:layout_height="75dp"
+                android:paddingTop ="15dp"
                 android:layout_alignParentLeft="true"
-                android:text="80\% safe"
                 android:layout_marginLeft="20dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="18sp"
-                android:gravity="center_vertical"/>
+                android:layout_alignBottom="@id/positive_coverage"
+                />
 
 
         </RelativeLayout>
@@ -77,24 +74,20 @@
         app:layoutManager="com.ramotion.cardslider.CardSliderLayoutManager"
         app:viewUpdater="com.craftcodecrew.android.taata.cards.CardsUpdater" />
 
-    <TextView
+    <TextSwitcher
         android:id="@+id/category_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/carousel"
-        android:textSize="18sp"
-        android:layout_marginLeft="25dp"
-        android:padding="20dp"
-        android:text="this is the description text for the category. For example what you can understand as belongings, or so...."/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_gravity="center_vertical"
+        />
 
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:layout_below="@id/category_description" />
-
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/login"
